@@ -17,9 +17,9 @@ void init_player(Player *player, const char symbol, const char *name)
    player->y = 0;
 }
 
-void display_player(const Player *player)
+void display_player(WINDOW *window, const Player *player)
 {
-  mvprintw(player->y, player->x, "%c", player->symbol);
+  mvwaddch(window, player->y, player->x, player->symbol);
 }
 
 void move_player(Player *player, int dx, int dy)
