@@ -20,7 +20,7 @@ int main()
   WINDOW *side_window = newwin(box_height, box2_width, 0, box1_width);
 
   Player player;
-  init_player(&player, '@', "Hero");
+  init_player(&player, '@', 1, 1, "Hero", 100, 100, 10, 200, 200, 100);
     
   int ch;
   while((ch = getch()) != 'q')
