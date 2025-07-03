@@ -43,13 +43,14 @@ int main()
     
     werase(main_window);
     box(main_window, 0, 0);
-    mvwprintw(main_window, 0, 2, " Game ");
+    mvwprintw(main_window, 0, 2, "Game");
+    mvwprintw(main_window, box_height - 1, 2, "Position: (%d, %d)", player.x, player.y);
     display_player(main_window, &player);
     wrefresh(main_window);
 
     werase(side_window);
     box(side_window, 0, 0);
-    mvwprintw(side_window, 0, 2, " Info ");
+    mvwprintw(side_window, 0, 2, "Info");
     display_player_info(side_window, &player);
     wrefresh(side_window);
   }
