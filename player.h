@@ -11,5 +11,6 @@ typedef struct
 
 void init_player(Player *player, const char symbol, const char *name);
 void display_player(const Player *player);
+void move_player(Player *player, int dx, int dy);
 
 #endif

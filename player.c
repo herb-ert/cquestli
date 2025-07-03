@@ -22,3 +22,8 @@ void display_player(const Player *player)
   mvprintw(player->y, player->x, "%c", player->symbol);
 }
 
+void move_player(Player *player, int dx, int dy)
+{
+  player->x += dx;
+  player->y += dy;
+}
