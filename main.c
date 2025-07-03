@@ -50,8 +50,7 @@ int main()
     werase(side_window);
     box(side_window, 0, 0);
     mvwprintw(side_window, 0, 2, " Info ");
-    mvwprintw(side_window, 2, 2, "Name: %s", player.name);
-    mvwprintw(side_window, 3, 2, "Pos (%d, %d)", player.x, player.y);
+    display_player_info(side_window, &player);
     wrefresh(side_window);
   }
 

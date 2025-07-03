@@ -22,8 +22,15 @@ void display_player(WINDOW *window, const Player *player)
   mvwaddch(window, player->y, player->x, player->symbol);
 }
 
+void display_player_info(WINDOW *window, const Player *player)
+{
+  mvwprintw(window, 1, 2, "Name: %s", player->name);
+  mvwprintw(window, 2, 2, "Pos (%d, %d)", player->x, player->y);
+}
+
 void move_player(Player *player, int dx, int dy)
 {
   player->x += dx;
   player->y += dy;
 }
+
