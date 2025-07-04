@@ -25,5 +25,8 @@ typedef struct
 } Item;
 
 void init_item(Item *item, int id, char *name, char *description, Rarity rarity, Category category);
+char* get_rarity_name(Rarity rarity);
+char* get_category_name(Category category);
+int get_rarity_color(Rarity rarity);
 
 #endif

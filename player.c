@@ -1,4 +1,8 @@
-#include <ncurses.h>
+#ifdef _WIN32
+  #include "curses.h"
+#else
+  #include <ncurses.h>
+#endif
 #include <stdlib.h>
 #include <string.h>
 #include "player.h"
@@ -87,6 +91,23 @@ void display_player_inventory(WINDOW *window, const Player *player, int selected
       }
     }
   }
+   
+  Item item = player->items[selected_col][selected_row];
+
+  if (item.name != NULL)
+  {
+    mvwprintw(window, INVENTORY_ROWS + 2, 2, "%s", item.name);
+
+    wattron(window, COLOR_PAIR(10) | A_DIM);
+    mvwprintw(window, INVENTORY_ROWS + 3, 2, "%s", item.description);
+    wattroff(window, COLOR_PAIR(10) | A_DIM);
+    
+    wattron(window, get_rarity_color(item.rarity));
+    mvwprintw(window, INVENTORY_ROWS + 4, 2, "%s", get_rarity_name(item.rarity));
+    wattroff(window, get_rarity_color(item.rarity));
+
+    mvwprintw(window, INVENTORY_ROWS + 5, 2, "%s", get_category_name(item.category));
+  }  
 }
 
 void move_player(Player *player, int dx, int dy)

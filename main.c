@@ -1,4 +1,8 @@
-#include <ncurses.h> 
+#ifdef _WIN32
+  #include "curses.h"
+#else
+  #include <ncurses.h>
+#endif
 #include <stdlib.h>
 #include <string.h>
 #include "player.h"
@@ -9,12 +13,25 @@ typedef enum {
   GAME_STATE_INVENTORY
 } GameState;
 
+void init_color_pairs()
+{
+  init_pair(1, COLOR_WHITE, -1);
+  init_pair(2, COLOR_GREEN, -1);
+  init_pair(3, COLOR_BLUE, -1);
+  init_pair(4, COLOR_MAGENTA, -1);
+  init_pair(5, COLOR_YELLOW, -1);
+  init_pair(10, COLOR_WHITE, -1);
+}
+
 int main()
 {
   initscr();
   noecho();
   curs_set(0); // hides the blinking cursour
   keypad(stdscr, TRUE);
+  start_color();
+  use_default_colors();
+  init_color_pairs();
   
   int term_height, term_width;
   getmaxyx(stdscr, term_height, term_width);
@@ -27,11 +44,15 @@ int main()
   WINDOW *main_window = newwin(box_height, box1_width, 0, 0);
   WINDOW *info_window = newwin(box_height_half, box2_width, 0, box1_width);
   WINDOW *inventory_window = newwin(box_height_half, box2_width, box_height_half, box1_width);
+    
+  wbkgd(main_window, COLOR_PAIR(0) | ' ');
+  wbkgd(info_window, COLOR_PAIR(0) | ' ');
+  wbkgd(inventory_window, COLOR_PAIR(0) | ' ');
 
   Item items[5][4] = {0};
 
   Item bread;
-  init_item(&bread, 0, "Bread", "Flour & Water", COMMON, CONSUMABLE);
+  init_item(&bread, 0, "Bread", "Flour & Water", EPIC, CONSUMABLE);
   items[0][0] = bread;
 
   Player player;
@@ -97,7 +118,7 @@ int main()
           }
         }
     }
-    
+
     werase(main_window);
     box(main_window, 0, 0);
     mvwprintw(main_window, 0, 2, "Game");
