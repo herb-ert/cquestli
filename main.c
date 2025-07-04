@@ -52,7 +52,7 @@ int main()
   Item items[5][4] = {0};
 
   Item bread;
-  init_item(&bread, 0, "Bread", "Flour & Water", EPIC, CONSUMABLE);
+  init_item(&bread, 0, "Bread", "Flour & Water", COMMON, CONSUMABLE);
   items[0][0] = bread;
 
   Player player;
